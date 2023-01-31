@@ -1,15 +1,40 @@
-use anyhow::Result;
-use serde_json::Value;
-use std::fs;
+use std::{cell::RefCell, rc::Rc};
 
-mod list_node;
-pub use list_node::ListNode;
+/// ListNode is a base struct used in leetcode exercises, is replicated here to
+/// make the code possible to be compiled colally.
+#[derive(PartialEq, Eq, Clone, Debug, Default)]
+pub struct BTree<T>
+where
+    T: Clone + Default,
+{
+    pub val: T,
+    pub left: Option<Rc<RefCell<Self>>>,
+    pub right: Option<Rc<RefCell<Self>>>,
+}
 
-pub fn read_file(path: &str) -> Result<Vec<Value>> {
-    let content = fs::read_to_string(path)?;
-    Ok(content
-        .trim()
-        .split('\n')
-        .flat_map(|t| serde_json::from_str(t))
-        .collect::<Vec<Value>>())
+impl<T: Clone + Default> BTree<T> {
+    #[inline]
+    pub fn new(val: T) -> Self {
+        BTree {
+            left: None,
+            right: None,
+            val,
+        }
+    }
+}
+
+#[derive(PartialEq, Eq, Clone, Debug, Default)]
+pub struct ListNode<T>
+where
+    T: Clone + Default,
+{
+    pub val: T,
+    pub next: Option<Box<ListNode<T>>>,
+}
+
+impl<T: Clone + Default> ListNode<T> {
+    #[inline]
+    pub fn new(val: T) -> Self {
+        ListNode { next: None, val }
+    }
 }
