@@ -24,7 +24,7 @@
         ];
       };
 
-      leetcode = pkgs.rustPlatform.buildRustPackage rec {
+      leetcode = pkgs.rustPlatform.buildRustPackage {
         pname = "leetcode";
         version = "0.3.12";
 
@@ -76,16 +76,16 @@
           fi 
         fi
       '';
+
     in {
       defaultPackage = naersk-lib.buildPackage {
         src = ./.;
-        buildInputs = with pkgs; [
+        buildInputs = [
         ];
         RUST_LOG = "trace";
       };
 
-
-      devShell = with pkgs;
+     devShell = with pkgs;
         mkShell {
           buildInputs = [
             (pkgs.fenix.complete.withComponents [
@@ -101,6 +101,7 @@
             pre-commit
             leetcode
           ];
+
           RUST_LOG = "debug";
           nativeBuildInputs = [pkgs.pkg-config];
           RUST_SRC_PATH = rustPlatform.rustLibSrc;
