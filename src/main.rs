@@ -12,6 +12,12 @@ pub mod _2;
 #[path = "3.rs"]
 pub mod _3;
 
+#[path = "4.rs"]
+pub mod _4;
+
+#[path = "6.rs"]
+pub mod _6;
+
 #[path = "11.rs"]
 pub mod _11;
 
