@@ -6,6 +6,12 @@ mod example;
 #[path = "1.rs"]
 pub mod _1;
 
+#[path = "2.rs"]
+pub mod _2;
+
+#[path = "3.rs"]
+pub mod _3;
+
 #[path = "11.rs"]
 pub mod _11;
 
