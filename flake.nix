@@ -1,6 +1,5 @@
 {
   inputs = {
-    naersk.url = "github:nix-community/naersk/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
     fenix = {
@@ -13,7 +12,6 @@
     { self
     , nixpkgs
     , utils
-    , naersk
     , fenix
     ,
     }:
@@ -60,8 +58,6 @@
           };
         };
 
-      naersk-lib = pkgs.callPackage naersk { };
-
       watch_script = pkgs.writeShellScriptBin "watch-script" ''
         #!/bin/bash
         cargo watch -x "fmt" -s "leetcode t $(\cat ./pick_test)"
@@ -80,15 +76,12 @@
         fi
       '';
 
+      leetcode_alias = pkgs.writeShellScriptBin "c" ''
+        #!/bin/bash
+        leetcode "$@"
+      '';
     in
     {
-      defaultPackage = naersk-lib.buildPackage {
-        src = ./.;
-        buildInputs = [
-        ];
-        RUST_LOG = "trace";
-      };
-
       devShell = with pkgs;
         mkShell {
           buildInputs = [
@@ -104,6 +97,7 @@
             cargo-watch
             pre-commit
             leetcode
+            leetcode_alias
           ];
 
           RUST_LOG = "debug";
