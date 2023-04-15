@@ -2,7 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 /// ListNode is a base struct used in leetcode exercises, is replicated here to
 /// make the code possible to be compiled colally.
-#[derive(PartialEq, Eq, Clone, Debug, Default)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct BTree<T>
 where
     T: Clone + Default,
