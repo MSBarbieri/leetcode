@@ -22,6 +22,7 @@ impl<T: Clone + Default> BTree<T> {
         }
     }
 }
+pub type TreeNode = BTree<i32>;
 
 #[derive(PartialEq, Eq, Clone, Debug, Default)]
 pub struct ListNode<T>
