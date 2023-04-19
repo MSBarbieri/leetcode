@@ -66,6 +66,9 @@ pub mod _110;
 #[path = "111.rs"]
 pub mod _111;
 
+#[path = "112.rs"]
+pub mod _112;
+
 #[path = "125.rs"]
 pub mod _125;
 
