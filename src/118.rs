@@ -52,8 +52,3 @@ impl Solution {
 }
 /// @lc code=end
 struct End;
-
-#[test]
-fn new_test() {
-    println!("{:?}", Solution::generate(8));
-}
